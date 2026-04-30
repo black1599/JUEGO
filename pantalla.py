@@ -96,6 +96,12 @@ while True:
     # Divisor vertical
     pygame.draw.line(pantalla, NEGRO, (450, 65), (450, 510), 2)
 
+    # Caja de eventos
+    rectangulo(pygame.Rect(480, 295, 590, 110), BLANCO, NEGRO)
+
+    texto("EVENTOS", fuente_titulo, NEGRO, 490, 300)
+    texto("DEMANDA  +30 MW", fuente, NEGRO, 490, 325)
+    texto("VENTA       120 MW", fuente, NEGRO, 490, 350)
 
 
     pygame.display.flip() #actualiza la pantalla
