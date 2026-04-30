@@ -71,6 +71,15 @@ while True:
     rectangulo(pygame.Rect(10, 175, 300, 330), BLANCO, NEGRO)
     texto("IMAGEN ANIMADA", fuente, GRIS_OSC, 90, 330)
 
+    # Grid 3x2 de plantas
+    plantas = [
+        ("SOLAR", "8 MW", "160 €"),
+        ("HIDROELÉCTRICA", "20 MW", "400 €"),
+        ("NUCLEAR", "80 MW", "1200 €"),
+        ("EÓLICO", "17 MW", "200 €"),
+        ("CARBÓN", "10 MW", "80 €"),
+        ("GAS", "22 MW", "280 €"),
+    ]
 
     pygame.display.flip() #actualiza la pantalla
     clock.tick(60) #limite de fps
