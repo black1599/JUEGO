@@ -15,8 +15,18 @@ pygame.display.set_caption("Simulador de Gestión de Energía")
 #Reloj para los FPS
 clock = pygame.time.Clock()
 
-####funciones...
-###colores y letra
+#Colores
+BLANCO = (255, 255, 255)
+NEGRO = (0, 0, 0)
+GRIS = (200, 200, 200)
+GRIS_OSC = (100, 100, 100)
+VERDE = (50, 180, 80)
+ROJO = (200, 60, 60)
+
+#Texto
+fuente_titulo = pygame.font.SysFont("arial", 16, bold=True)
+fuente = pygame.font.SysFont("arial", 13)
+
 #bucle
 while True:
     for evento in pygame.event.get():
