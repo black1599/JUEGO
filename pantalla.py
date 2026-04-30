@@ -61,5 +61,12 @@ while True:
     texto("PRODUCCIÓN", fuente, NEGRO, 20, 75)
     texto("DEMANDA", fuente, NEGRO, 20, 105)
 
+    #Barras visuales y balance
+    pygame.draw.rect(pantalla, VERDE, pygame.Rect(130, 78, 100, 16))
+    pygame.draw.rect(pantalla, ROJO, pygame.Rect(130, 108, 150, 16))
+
+    texto("BALANCE:  -80 MW", fuente_titulo, ROJO, 20, 135)
+
+
     pygame.display.flip() #actualiza la pantalla
     clock.tick(60) #limite de fps
