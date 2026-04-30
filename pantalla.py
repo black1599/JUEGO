@@ -52,6 +52,8 @@ while True:
 
     texto("NIVEL: 1", fuente_titulo, NEGRO, 30, 22)
     texto("DINERO: 500 €", fuente_titulo, NEGRO, 160, 22)
+    texto("PRODUCCIÓN: 120 MW", fuente_titulo, NEGRO, 350, 22)
+    texto("DEMANDA: 200 MW", fuente_titulo, NEGRO, 590, 22)
 
     pygame.display.flip() #actualiza la pantalla
     clock.tick(60) #limite de fps
