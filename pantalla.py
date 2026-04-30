@@ -67,6 +67,10 @@ while True:
 
     texto("BALANCE:  -80 MW", fuente_titulo, ROJO, 20, 135)
 
+    # Imagen animada
+    rectangulo(pygame.Rect(10, 175, 300, 330), BLANCO, NEGRO)
+    texto("IMAGEN ANIMADA", fuente, GRIS_OSC, 90, 330)
+
 
     pygame.display.flip() #actualiza la pantalla
     clock.tick(60) #limite de fps
