@@ -15,4 +15,17 @@ pygame.display.set_caption("Simulador de Gestión de Energía")
 #Reloj para los FPS
 clock = pygame.time.Clock()
 
+####funciones...
+###colores y letra
+#bucle
+while True:
+    for evento in pygame.event.get():
+        if evento.type == pygame.QUIT:
+            pygame.quit()
+            sys.exit()
 
+    #limpiar pantalla
+    pantalla.fill((230, 230, 230))
+
+    pygame.display.flip() #actualiza la pantalla
+    clock.tick(60) #limite de fps
