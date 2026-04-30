@@ -47,5 +47,11 @@ while True:
     #limpiar pantalla
     pantalla.fill((230, 230, 230))
 
+    # HUD superior
+    rectangulo(pygame.Rect(10, 10, ANCHO - 20, 45), BLANCO, NEGRO)
+
+    texto("NIVEL: 1", fuente_titulo, NEGRO, 30, 22)
+    texto("DINERO: 500 €", fuente_titulo, NEGRO, 160, 22)
+
     pygame.display.flip() #actualiza la pantalla
     clock.tick(60) #limite de fps
