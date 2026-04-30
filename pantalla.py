@@ -80,6 +80,20 @@ while True:
         ("CARBÓN", "10 MW", "80 €"),
         ("GAS", "22 MW", "280 €"),
     ]
+    for i, (nombre, mw, coste) in enumerate(plantas):
+        col = i % 3
+        fila = i // 3
+
+        cx = 480 + col * 197
+        cy = 65 + fila * 112
+
+        rectangulo(pygame.Rect(cx, cy, 185, 100), BLANCO, NEGRO)
+
+        texto(nombre, fuente_titulo, NEGRO, cx + 10, cy + 10)
+        texto(mw, fuente, NEGRO, cx + 10, cy + 38)
+        texto(coste, fuente, GRIS_OSC, cx + 10, cy + 62)
+
+
 
     pygame.display.flip() #actualiza la pantalla
     clock.tick(60) #limite de fps
