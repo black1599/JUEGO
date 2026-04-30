@@ -93,6 +93,9 @@ while True:
         texto(mw, fuente, NEGRO, cx + 10, cy + 38)
         texto(coste, fuente, GRIS_OSC, cx + 10, cy + 62)
 
+    # Divisor vertical
+    pygame.draw.line(pantalla, NEGRO, (450, 65), (450, 510), 2)
+
 
 
     pygame.display.flip() #actualiza la pantalla
