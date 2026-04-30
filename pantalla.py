@@ -55,5 +55,11 @@ while True:
     texto("PRODUCCIÓN: 120 MW", fuente_titulo, NEGRO, 350, 22)
     texto("DEMANDA: 200 MW", fuente_titulo, NEGRO, 590, 22)
 
+    # Panel izquierdo
+    rectangulo(pygame.Rect(10, 65, 300, 100), BLANCO, NEGRO)
+
+    texto("PRODUCCIÓN", fuente, NEGRO, 20, 75)
+    texto("DEMANDA", fuente, NEGRO, 20, 105)
+
     pygame.display.flip() #actualiza la pantalla
     clock.tick(60) #limite de fps
