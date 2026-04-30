@@ -27,6 +27,16 @@ ROJO = (200, 60, 60)
 fuente_titulo = pygame.font.SysFont("arial", 16, bold=True)
 fuente = pygame.font.SysFont("arial", 13)
 
+# Función para dibujar texto
+def texto(txt, f, color, x, y):
+    s = f.render(txt, True, color)
+    pantalla.blit(s, (x, y))
+
+
+# Función para dibujar rectángulos
+def rectangulo(rect, color_fondo, color_borde):
+    pygame.draw.rect(pantalla, color_fondo, rect)
+    pygame.draw.rect(pantalla, color_borde, rect, 2)
 #bucle
 while True:
     for evento in pygame.event.get():
