@@ -103,6 +103,17 @@ while True:
     texto("DEMANDA  +30 MW", fuente, NEGRO, 490, 325)
     texto("VENTA       120 MW", fuente, NEGRO, 490, 350)
 
+    # Botones inferiores
+    rectangulo(pygame.Rect(10, 530, ANCHO - 20, 60), BLANCO, NEGRO)
+
+    for label, bx in [
+        ("SIGUIENTE NIVEL", 40),
+        ("VENDER EXCEDENTE", 280),
+        ("REINICIAR", 520)
+    ]:
+        rectangulo(pygame.Rect(bx, 548, 190, 30), GRIS, NEGRO)
+        texto(label, fuente, NEGRO, bx + 15, 555)
+
 
     pygame.display.flip() #actualiza la pantalla
     clock.tick(60) #limite de fps
