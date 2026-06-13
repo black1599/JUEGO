@@ -136,4 +136,13 @@ SOURCES_DATA = [
         "description": "El futuro de la energía",
     } ,
 ]
+# ── Progresión de niveles ─────────────────────────────────────────────────────
+LEVEL_XP = [0, 100, 250, 500, 900, 1500]
 
+# ── Economía ──────────────────────────────────────────────────────────────────
+INCOME_PER_MW    = 3
+SELL_RATE        = 2
+DEFICIT_PENALTY  = 5
+POLLUTION_FINE   = 4
+POLLUTION_LIMIT  = 20
+DEMAND_GROWTH_TURNS = 3
