@@ -28,3 +28,46 @@ TEAL        = (26,  188, 156)
 GRAY        = (100, 110, 130)
 GRAY_LIGHT  = (150, 160, 180)
 GRAY_DARK   = (60,  68,  88)
+
+# ── Fuentes de energía ────────────────────────────────────────────────────────
+SOURCES_DATA = [
+    {
+        "id": "coal",
+        "name": "Carbón",
+        "emoji": "C",
+        "color": (120, 100, 80),
+        "mw": 10,
+        "cost": 80,
+        "op_cost": 5,
+        "pollutes": True,
+        "pollution_amt": 3,
+        "unlock_level": 1,
+        "description": "Barato pero contaminante",
+    },
+    {
+        "id": "solar",
+        "name": "Solar",
+        "emoji": "S",
+        "color": (241, 196, 15),
+        "mw": 8,
+        "cost": 150,
+        "op_cost": 1,
+        "pollutes": False,
+        "pollution_amt": 0,
+        "unlock_level": 1,
+        "description": "Limpia, bajo mantenimiento",
+    },
+    {
+        "id": "wind",
+        "name": "Eólico",
+        "emoji": "W",
+        "color": (110, 190, 240),
+        "mw": 15,
+        "cost": 220,
+        "op_cost": 2,
+        "pollutes": False,
+        "pollution_amt": 0,
+        "unlock_level": 1,
+        "description": "Buena relación coste/MW",
+    },
+]
