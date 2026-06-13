@@ -146,3 +146,13 @@ DEFICIT_PENALTY  = 5
 POLLUTION_FINE   = 4
 POLLUTION_LIMIT  = 20
 DEMAND_GROWTH_TURNS = 3
+
+# ── UI ────────────────────────────────────────────────────────────────────────
+FPS         = 60
+SIDEBAR_W   = 340
+TOPBAR_H    = 90
+CARD_COLS   = 2
+CARD_W      = 148
+CARD_H      = 100
+CARD_PAD    = 8
+LOG_MAX     = 12
