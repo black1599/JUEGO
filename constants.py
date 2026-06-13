@@ -134,6 +134,6 @@ SOURCES_DATA = [
         "pollution_amt": 0,
         "unlock_level": 5,
         "description": "El futuro de la energía",
-    },
+    } ,
 ]
 
