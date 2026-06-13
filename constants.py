@@ -70,7 +70,6 @@ SOURCES_DATA = [
         "unlock_level": 1,
         "description": "Buena relación coste/MW",
     },
-]
 {
         "id": "hydro",
         "name": "Hidroeléctrica",
@@ -136,3 +135,5 @@ SOURCES_DATA = [
         "unlock_level": 5,
         "description": "El futuro de la energía",
     },
+]
+
