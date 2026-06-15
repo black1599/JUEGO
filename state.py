@@ -83,3 +83,31 @@ class GameState:
             self._log(f"Vendido {excess} MW → +€{earned}", "good")
             return earned
 
+        def next_turn(self):
+            """Avanza un turno. Retorna lista de eventos del turno."""
+            if self.game_over:
+                return
+
+            events = []
+            self.turn += 1
+            self.total_turns += 1
+
+            # Costes operativos
+            op = self.op_cost
+            self.money -= op
+            if op > 0:
+                events.append((f"Costes operativos: -€{op}", "warn"))
+
+            # Ingresos / penalizaciones por balance
+            if self.production >= self.demand:
+                income = round(self.demand * INCOME_PER_MW)
+                self.money += income
+                xp_gain = 10 + self.level * 6
+                self.xp += xp_gain
+                events.append((f"Demanda satisfecha +€{income} +{xp_gain}XP", "good"))
+            else:
+                deficit = self.demand - self.production
+                penalty = round(deficit * DEFICIT_PENALTY)
+                self.money -= penalty
+                events.append((f"Déficit {deficit} MW → -€{penalty}", "bad"))
+
