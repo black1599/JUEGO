@@ -135,3 +135,18 @@ class GameView:
                 if self.on_buy_source:
                     self.on_buy_source(src_id)
 
+
+    def update(self, dt: float, level: int):
+        """Actualiza animaciones internas de la vista."""
+        self._time  += dt
+        self._pulse  = math.sin(self._time * 2.0)
+        self.city.update(dt, level)
+        for btn in self.all_buttons:
+            btn.update(dt)
+        for card, _ in self.cards:
+            card.update(dt)
+        self._floats = [f for f in self._floats if f.alive]
+        for f in self._floats:
+            f.update(dt)
+
+
