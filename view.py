@@ -160,3 +160,126 @@ class GameView:
             f.draw(self.screen)
 
 
+    # ── Renderizado del juego ─────────────────────────────────────────────────
+
+    def _draw_game(self, s: dict):
+        city_surf = pygame.Surface((CITY_W, CITY_H))
+        self.city.draw(city_surf, s["production"], s["demand"])
+        self.screen.blit(city_surf, (0, TOPBAR_H))
+
+        self._draw_topbar(s)
+        self._draw_sidebar(s)
+        self._draw_hud_overlay(s)
+
+    def _draw_topbar(self, s: dict):
+        pygame.draw.rect(self.screen, PANEL_BG, (0, 0, SCREEN_W, TOPBAR_H))
+        pygame.draw.line(self.screen, BORDER, (0, TOPBAR_H), (SCREEN_W, TOPBAR_H), 1)
+
+        draw_text(self.screen, "⚡ ENERGY MANAGER", (16, 12), YELLOW, 18, bold=True)
+        draw_text(self.screen, f"Turno {s['turn']}", (16, 40), GRAY_LIGHT, 12)
+
+        stats = [
+            ("💰 Dinero",     f"€{s['money']:,}",
+             GREEN if s["money"] >= 0 else RED),
+            ("⚡ Producción", f"{s['production']} MW",
+             GREEN if s["production"] >= s["demand"] else RED),
+            ("🏙 Demanda",    f"{s['demand']} MW", BLUE_LIGHT),
+            ("☁ Contam.",    f"{s['pollution']}",
+             GREEN if s["pollution"] <= 20 else ORANGE),
+        ]
+        sx = 200
+        for label, val, col in stats:
+            draw_text(self.screen, label, (sx, 10), GRAY_LIGHT, 11)
+            draw_text(self.screen, val,   (sx, 28), col, 16, bold=True)
+            sx += 160
+
+        lv_x = SCREEN_W - 220
+        draw_text(self.screen, f"Nivel {s['level']}", (lv_x, 10), YELLOW, 13, bold=True)
+        xp_rect = pygame.Rect(lv_x, 30, 190, 10)
+        draw_bar(self.screen, xp_rect, s["xp"], s["xp_needed"], YELLOW_DARK, border_color=BORDER)
+        draw_text(self.screen, f"{s['xp']}/{s['xp_needed']} XP", (lv_x, 44), GRAY, 10)
+
+    def _draw_sidebar(self, s: dict):
+        pygame.draw.rect(self.screen, PANEL_BG, (SIDEBAR_X, 0, SIDEBAR_W, SCREEN_H))
+        pygame.draw.line(self.screen, BORDER, (SIDEBAR_X, 0), (SIDEBAR_X, SCREEN_H), 1)
+        draw_text(self.screen, "FUENTES DE ENERGÍA",
+                  (SIDEBAR_X + 12, TOPBAR_H + 8), GRAY_LIGHT, 11)
+
+        owned     = s["owned"]
+        level     = s["level"]
+        money     = s["money"]
+        for card, src_id in self.cards:
+            src_data   = next(src for src in SOURCES_DATA if src["id"] == src_id)
+            locked     = src_data["unlock_level"] > level
+            count      = owned.get(src_id, 0)
+            can_afford = money >= src_data["cost"]
+            card.draw(self.screen, count, locked, can_afford)
+
+        for btn in self.all_buttons:
+            btn.draw(self.screen)
+
+    def _draw_hud_overlay(self, s: dict):
+        hud_x, hud_y = 12, TOPBAR_H + 12
+        panel_w, panel_h = 240, 85
+        panel_surf = pygame.Surface((panel_w, panel_h), pygame.SRCALPHA)
+        pygame.draw.rect(panel_surf, (*PANEL_BG, 200), panel_surf.get_rect(), border_radius=10)
+        self.screen.blit(panel_surf, (hud_x, hud_y))
+        pygame.draw.rect(self.screen, BORDER,
+                         (hud_x, hud_y, panel_w, panel_h), width=1, border_radius=10)
+
+        draw_text(self.screen, "RED ELÉCTRICA", (hud_x + 10, hud_y + 8), GRAY_LIGHT, 10)
+
+        bar_max = max(s["demand"] * 1.5, s["production"] + 20, 50)
+        draw_text(self.screen, "Prod.", (hud_x + 10, hud_y + 24), GRAY_LIGHT, 10)
+        draw_bar(self.screen, pygame.Rect(hud_x + 55, hud_y + 24, 150, 10),
+                 s["production"], bar_max, GREEN, border_color=BORDER)
+        draw_text(self.screen, f"{s['production']}", (hud_x + 210, hud_y + 24), GREEN, 10)
+
+        draw_text(self.screen, "Dem.", (hud_x + 10, hud_y + 40), GRAY_LIGHT, 10)
+        draw_bar(self.screen, pygame.Rect(hud_x + 55, hud_y + 40, 150, 10),
+                 s["demand"], bar_max, RED, border_color=BORDER)
+        draw_text(self.screen, f"{s['demand']}", (hud_x + 210, hud_y + 40), RED, 10)
+
+        bal     = s["balance"]
+        bal_col = GREEN if bal >= 0 else RED
+        draw_text(self.screen, f"Balance: {'+' if bal >= 0 else ''}{bal} MW",
+                  (hud_x + 10, hud_y + 60), bal_col, 12, bold=True)
+
+        # Log
+        log_x = 12
+        log_y = TOPBAR_H + CITY_H - 170
+        log_w, log_h = CITY_W - 24, 155
+        log_surf = pygame.Surface((log_w, log_h), pygame.SRCALPHA)
+        pygame.draw.rect(log_surf, (*PANEL_BG, 200), log_surf.get_rect(), border_radius=10)
+        self.screen.blit(log_surf, (log_x, log_y))
+        pygame.draw.rect(self.screen, BORDER,
+                         (log_x, log_y, log_w, log_h), width=1, border_radius=10)
+        draw_text(self.screen, "REGISTRO", (log_x + 10, log_y + 8), GRAY_LIGHT, 10)
+        for i, (msg, col_key) in enumerate(s["log_entries"][:8]):
+            col = LOG_COLORS.get(col_key, GRAY_LIGHT)
+            draw_text(self.screen, msg, (log_x + 10, log_y + 24 + i * 16), col, 11)
+
+    def _draw_gameover(self, s: dict):
+        self.screen.fill(DARK_BG)
+        cx, cy = SCREEN_W // 2, SCREEN_H // 2
+        overlay = pygame.Surface((600, 320), pygame.SRCALPHA)
+        pygame.draw.rect(overlay, (*PANEL_BG, 230), overlay.get_rect(), border_radius=18)
+        self.screen.blit(overlay, (cx - 300, cy - 160))
+        pygame.draw.rect(self.screen, RED, (cx - 300, cy - 160, 600, 320), width=2, border_radius=18)
+
+        draw_text(self.screen, "QUIEBRA", (cx, cy - 110), RED, 42, bold=True, anchor="center")
+        draw_text(self.screen, "Tu ciudad se quedó sin luz...", (cx, cy - 55),
+                  GRAY_LIGHT, 16, anchor="center")
+        draw_text(self.screen, f"Turnos jugados: {s['total_turns']}",
+                  (cx, cy - 15), WHITE, 14, anchor="center")
+        draw_text(self.screen, f"Nivel alcanzado: {s['level']}",
+                  (cx, cy + 15), WHITE, 14, anchor="center")
+        pulse = int(200 + 55 * math.sin(self._time * 3))
+        draw_text(self.screen, "Clic o [R] para reiniciar",
+                  (cx, cy + 80), (pulse, pulse, pulse), 16, anchor="center")
+
+
+
+
+
+
