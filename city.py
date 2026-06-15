@@ -52,3 +52,15 @@ class CityRenderer:
             x += w + random.randint(2, 6)
         self._last_level = level
 
+    def update(self, dt, level):
+        self._time += dt
+        if level != self._last_level:
+            self._generate_buildings(level)
+        # Parpadeo de ventanas lento
+        if random.random() < 0.02:
+            if self._buildings:
+                b = random.choice(self._buildings)
+                if b["windows"]:
+                    idx = random.randint(0, len(b["windows"]) - 1)
+                    wx, wy, lit = b["windows"][idx]
+                    b["windows"][idx] = (wx, wy, not lit)
