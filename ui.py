@@ -106,3 +106,77 @@ class Button:
         txt = f"{self.icon} {self.label}" if self.icon else self.label
         tc = GRAY if not self.enabled else self.text_color
         draw_text(surf, txt, r.center, tc, self.font_size, anchor="center")
+
+class SourceCard:
+    """Tarjeta de fuente de energía."""
+
+    def __init__(self, rect, source_data):
+        self.rect   = pygame.Rect(rect)
+        self.src    = source_data
+        self.hovered = False
+        self._anim  = 0.0
+
+    def handle_event(self, event, locked):
+        if locked:
+            return False
+        if event.type == pygame.MOUSEMOTION:
+            self.hovered = self.rect.collidepoint(event.pos)
+        if event.type == pygame.MOUSEBUTTONDOWN and event.button == 1:
+            if self.rect.collidepoint(event.pos) and not locked:
+                self._anim = 0.15
+                return True
+        return False
+
+    def update(self, dt):
+        if self._anim > 0:
+            self._anim = max(0, self._anim - dt)
+
+    def draw(self, surf, count, locked, can_afford):
+        bg = PANEL_LIGHT if self.hovered and not locked else PANEL_BG
+        alpha_surf = pygame.Surface((self.rect.width, self.rect.height), pygame.SRCALPHA)
+
+        if locked:
+            pygame.draw.rect(alpha_surf, (*PANEL_BG, 140), alpha_surf.get_rect(), border_radius=8)
+            surf.blit(alpha_surf, self.rect.topleft)
+            pygame.draw.rect(surf, BORDER, self.rect, width=1, border_radius=8)
+            draw_text(surf, "?", self.rect.center, GRAY, 28, bold=True, anchor="center")
+            unlock_lv = self.src["unlock_level"]
+            draw_text(surf, f"Nv.{unlock_lv}", (self.rect.centerx, self.rect.bottom - 14),
+                      GRAY, 11, anchor="center")
+            return
+
+        border_col = self.src["color"] if self.hovered else BORDER
+        draw_rect_rounded(surf, bg, self.rect, radius=8, border=1, border_color=border_col)
+
+        # Icono / letra grande con fondo coloreado
+        icon_r = pygame.Rect(self.rect.x + 6, self.rect.y + 8, 32, 32)
+        draw_rect_rounded(surf, self.src["color"], icon_r, radius=6)
+        draw_text(surf, self.src["emoji"], icon_r.center, BLACK, 15, bold=True, anchor="center")
+
+        # Nombre
+        draw_text(surf, self.src["name"], (self.rect.x + 45, self.rect.y + 10),
+                  WHITE, 12, bold=True)
+
+        # MW
+        draw_text(surf, f"{self.src['mw']} MW", (self.rect.x + 45, self.rect.y + 26),
+                  GRAY_LIGHT, 11)
+
+        # Coste
+        cost_col = GREEN if can_afford else RED
+        draw_text(surf, f"€{self.src['cost']}", (self.rect.x + 6, self.rect.y + 50),
+                  cost_col, 12, bold=True)
+
+        # Op cost
+        draw_text(surf, f"Op:€{self.src['op_cost']}/t", (self.rect.x + 6, self.rect.y + 66),
+                  GRAY, 10)
+
+        # Contaminante
+        if self.src["pollutes"]:
+            draw_text(surf, "♻ contam.", (self.rect.x + 6, self.rect.y + 80),
+                      (200, 140, 60), 9)
+
+        # Contador
+        if count > 0:
+            badge_r = pygame.Rect(self.rect.right - 26, self.rect.y + 6, 22, 18)
+            draw_rect_rounded(surf, GREEN_DARK, badge_r, radius=4)
+            draw_text(surf, str(count), badge_r.center, WHITE, 11, bold=True, anchor="center")
