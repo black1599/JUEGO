@@ -56,18 +56,19 @@ class GameState:
             if needed == 0:
                 return 1.0
             return min(1.0, self.xp / needed)
-# ── Acciones del jugador ──────────────────────────────────────────────────
-    def buy(self, source_id):
-        """Intenta comprar una unidad de la fuente indicada. Retorna mensaje."""
-        src = self._get_source(source_id)
-        if src["unlock_level"] > self.level:
-            return False, f"Necesitas nivel {src['unlock_level']}."
-        if self.money < src["cost"]:
-            return False, "Fondos insuficientes."
-        self.money -= src["cost"]
-        self.owned[source_id] += 1
-        if src["pollutes"]:
-            self.pollution += src["pollution_amt"]
-        self._log(f"+ {src['name']} ({src['mw']} MW)", "good")
-        return True, ""
+
+        # ── Acciones del jugador ──────────────────────────────────────────────────
+        def buy(self, source_id):
+            """Intenta comprar una unidad de la fuente indicada. Retorna mensaje."""
+            src = self._get_source(source_id)
+            if src["unlock_level"] > self.level:
+                return False, f"Necesitas nivel {src['unlock_level']}."
+            if self.money < src["cost"]:
+                return False, "Fondos insuficientes."
+            self.money -= src["cost"]
+            self.owned[source_id] += 1
+            if src["pollutes"]:
+                self.pollution += src["pollution_amt"]
+            self._log(f"+ {src['name']} ({src['mw']} MW)", "good")
+            return True, ""
 
