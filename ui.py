@@ -26,3 +26,12 @@ def font(size, bold=False):
     if key not in _fonts:
         _fonts[key] = load_font(size, bold)
     return _fonts[key]
+
+# ── Colores de log ────────────────────────────────────────────────────────────
+LOG_COLORS = {
+    "good":  (88, 214, 141),
+    "bad":   (231, 76, 60),
+    "warn":  (230, 126, 34),
+    "info":  (150, 170, 210),
+    "level": (241, 196, 15),
+}
