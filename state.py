@@ -124,3 +124,20 @@ class GameState:
                     self.demand += inc
                     events.append((f"La ciudad crece +{inc} MW", "info"))
 
+                    # ── Helpers ───────────────────────────────────────────────────────────────
+                    def _get_source(self, source_id):
+                        for s in SOURCES_DATA:
+                            if s["id"] == source_id:
+                                return s
+                        raise KeyError(source_id)
+
+                    def _log(self, msg, color_key="info"):
+                        from src.constants import LOG_MAX
+                        self.log_entries.insert(0, (f"T{self.turn}: {msg}", color_key))
+                        if len(self.log_entries) > LOG_MAX:
+                            self.log_entries.pop()
+
+                    def source_unlocked(self, source_id):
+                        src = self._get_source(source_id)
+                        return src["unlock_level"] <= self.level
+
