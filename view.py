@@ -14,5 +14,9 @@ from src.ui import (
     Button, SourceCard, LOG_COLORS, font,
 )
 from src.city import CityRenderer
+# ── Dimensiones calculadas ────────────────────────────────────────────────────
+CITY_W  = SCREEN_W - SIDEBAR_W
+CITY_H  = SCREEN_H - TOPBAR_H
+SIDEBAR_X = CITY_W
 
 
