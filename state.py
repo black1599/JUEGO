@@ -111,3 +111,16 @@ class GameState:
                 self.money -= penalty
                 events.append((f"Déficit {deficit} MW → -€{penalty}", "bad"))
 
+                # Subida de nivel
+                if self.level < len(LEVEL_XP) and self.xp >= self.xp_needed:
+                    self.level += 1
+                    self.xp = max(0, self.xp - self.xp_needed)
+                    events.append((f"¡Nivel {self.level}! Nuevas fuentes.", "level"))
+
+                # Crecimiento de demanda cada N turnos
+                if self.turn % DEMAND_GROWTH_TURNS == 0:
+                    rate = 0.10 + self.level * 0.02
+                    inc = max(5, round(self.demand * rate))
+                    self.demand += inc
+                    events.append((f"La ciudad crece +{inc} MW", "info"))
+
