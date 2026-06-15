@@ -44,3 +44,58 @@ class FloatingText:
         rendered.set_alpha(self.alpha)
         surf.blit(rendered, (int(self.x), int(self.y)))
 
+class GameView:
+
+    def __init__(self, screen: pygame.Surface):
+        self.screen = screen
+        self.city   = CityRenderer(CITY_W, CITY_H)
+        self._floats: list[FloatingText] = []
+        self._time   = 0.0
+        self._pulse  = 0.0
+
+        # ── Widgets ────────────────────────────────────────────────────────────
+        btn_y = SCREEN_H - 60
+        self.btn_turn = Button(
+            (SIDEBAR_X + 12, btn_y, SIDEBAR_W - 24, 36),
+            "Siguiente turno", BLUE, BLUE_DARK, font_size=14,
+        )
+        self.btn_sell = Button(
+            (SIDEBAR_X + 12, btn_y - 46, (SIDEBAR_W - 30) // 2, 32),
+            "Vender exceso", GREEN_DARK, (20, 90, 50), font_size=12,
+        )
+        self.btn_reset = Button(
+            (SIDEBAR_X + 12 + (SIDEBAR_W - 30) // 2 + 6, btn_y - 46,
+             (SIDEBAR_W - 30) // 2, 32),
+            "Reiniciar", (80, 40, 40), (120, 40, 40), font_size=12,
+        )
+        self.all_buttons = [self.btn_turn, self.btn_sell, self.btn_reset]
+
+        self.cards: list[tuple[SourceCard, str]] = []
+        self._build_cards()
+
+        # ── Callbacks asignados por el Presenter ───────────────────────────────
+        self.on_next_turn   = None   # ()
+        self.on_sell_excess = None   # ()
+        self.on_reset       = None   # ()
+        self.on_buy_source  = None   # (source_id: str)
+
+    # ── Construcción interna de widgets ───────────────────────────────────────
+
+    def _build_cards(self):
+        cols = CARD_COLS
+        start_y = TOPBAR_H + 10
+        for i, src in enumerate(SOURCES_DATA):
+            col = i % cols
+            row = i // cols
+            x = SIDEBAR_X + 12 + col * (CARD_W + CARD_PAD)
+            y = start_y + row * (CARD_H + CARD_PAD)
+            card = SourceCard((x, y, CARD_W, CARD_H), src)
+            self.cards.append((card, src["id"]))
+
+    # ── API pública ───────────────────────────────────────────────────────────
+
+    def add_float(self, text: str, pos: tuple, color: tuple):
+        """Añade un texto flotante animado."""
+        import random
+        jitter = (random.randint(-20, 20), random.randint(-5, 5))
+        self._floats.append(FloatingText(text, (pos[0] + jitter[0], pos[1] + jitter[1]), color))
