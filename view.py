@@ -99,3 +99,39 @@ class GameView:
         import random
         jitter = (random.randint(-20, 20), random.randint(-5, 5))
         self._floats.append(FloatingText(text, (pos[0] + jitter[0], pos[1] + jitter[1]), color))
+
+
+    def handle_event(self, event: pygame.event.Event, screen_mode: str, snapshot: dict):
+        """
+        Procesa un evento pygame.
+
+        """
+        if screen_mode == "gameover":
+            if event.type == pygame.KEYDOWN and event.key == pygame.K_r:
+                if self.on_reset:
+                    self.on_reset()
+            if event.type == pygame.MOUSEBUTTONDOWN:
+                if self.on_reset:
+                    self.on_reset()
+            return
+
+        if self.btn_turn.handle_event(event):
+            if self.on_next_turn:
+                self.on_next_turn()
+
+        if self.btn_sell.handle_event(event):
+            if self.on_sell_excess:
+                self.on_sell_excess()
+
+        if self.btn_reset.handle_event(event):
+            if self.on_reset:
+                self.on_reset()
+
+        level = snapshot.get("level", 1)
+        for card, src_id in self.cards:
+            src_data = next(s for s in SOURCES_DATA if s["id"] == src_id)
+            locked = src_data["unlock_level"] > level
+            if card.handle_event(event, locked):
+                if self.on_buy_source:
+                    self.on_buy_source(src_id)
+
