@@ -72,3 +72,14 @@ class GameState:
             self._log(f"+ {src['name']} ({src['mw']} MW)", "good")
             return True, ""
 
+        def sell_excess(self):
+            """Vende el exceso de producción."""
+            excess = self.balance
+            if excess <= 0:
+                self._log("Sin exceso para vender.", "warn")
+                return 0
+            earned = round(excess * SELL_RATE)
+            self.money += earned
+            self._log(f"Vendido {excess} MW → +€{earned}", "good")
+            return earned
+
