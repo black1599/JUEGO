@@ -149,4 +149,14 @@ class GameView:
         for f in self._floats:
             f.update(dt)
 
+    def render(self, snapshot: dict):
+        """Renderiza el frame completo a partir del snapshot."""
+        mode = snapshot.get("screen_mode", "game")
+        if mode == "gameover":
+            self._draw_gameover(snapshot)
+        else:
+            self._draw_game(snapshot)
+        for f in self._floats:
+            f.draw(self.screen)
+
 
