@@ -97,3 +97,19 @@ class GamePresenter:
     def _on_reset(self):
         self._model.reset()
         self._screen_mode = "game"
+
+    def _on_buy_source(self, source_id: str):
+        src_data = next(s for s in SOURCES_DATA if s["id"] == source_id)
+        # Buscar la tarjeta para saber su posición visual
+        card_pos = None
+        for card, sid in self._view.cards:
+            if sid == source_id:
+                card_pos = card.rect.midtop
+                break
+
+        ok, msg = self._model.buy(source_id)
+        if card_pos:
+            if ok:
+                self._view.add_float(f"+{src_data['mw']} MW", card_pos, GREEN_LIGHT)
+            else:
+                self._view.add_float(msg, card_pos, RED)
