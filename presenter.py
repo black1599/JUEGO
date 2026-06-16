@@ -27,4 +27,14 @@ class GamePresenter:
         self._view.on_reset       = self._on_reset
         self._view.on_buy_source  = self._on_buy_source
 
+# Bucle principal (llamado desde main)
+    def handle_event(self, event):
+        snapshot = self._build_snapshot()
+        self._view.handle_event(event, self._screen_mode, snapshot)
 
+    def update(self, dt: float):
+        self._view.update(dt, self._model.level)
+
+    def render(self):
+        snapshot = self._build_snapshot()
+        self._view.render(snapshot)
