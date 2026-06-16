@@ -72,3 +72,28 @@ class GamePresenter:
             # Log
             "log_entries": list(m.log_entries),
         }
+
+    # ── Callbacks de acciones de UI → modelo ─────────────────────────────────
+
+    def _on_next_turn(self):
+        events = self._model.next_turn()
+        if events:
+            for msg, col_key in events:
+                from src.ui import LOG_COLORS
+                c = LOG_COLORS.get(col_key, GRAY_LIGHT)
+                self._view.add_float(msg, (SIDEBAR_X + 170, TOPBAR_H + 20), c)
+        if self._model.game_over:
+            self._screen_mode = "gameover"
+
+    def _on_sell_excess(self):
+        earned = self._model.sell_excess()
+        if earned:
+            self._view.add_float(
+                f"+€{earned}",
+                (SIDEBAR_X + 170, 690),   # zona botones
+                GREEN_LIGHT,
+            )
+
+    def _on_reset(self):
+        self._model.reset()
+        self._screen_mode = "game"
