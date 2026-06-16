@@ -48,3 +48,27 @@ class GamePresenter:
         snapshot = self._build_snapshot()
         self._view.render(snapshot)
 
+
+    # ── Snapshot: convierte el estado del modelo en datos planos para la vista ─
+
+    def _build_snapshot(self) -> dict:
+        m = self._model
+        return {
+            "screen_mode": self._screen_mode,
+            # Turno / progresión
+            "turn":        m.turn,
+            "total_turns": m.total_turns,
+            "level":       m.level,
+            "xp":          m.xp,
+            "xp_needed":   m.xp_needed,
+            # Economía / energía
+            "money":       m.money,
+            "production":  m.production,
+            "demand":      m.demand,
+            "balance":     m.balance,
+            "pollution":   m.pollution,
+            # Plantas poseídas
+            "owned":       dict(m.owned),
+            # Log
+            "log_entries": list(m.log_entries),
+        }
