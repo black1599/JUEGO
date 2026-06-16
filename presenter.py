@@ -62,3 +62,13 @@ class GamePresenter:
             # Log
             "log_entries": list(m.log_entries),
         }
+
+    def _on_sell_excess(self):
+        earned = self._model.sell_excess()
+        if earned:
+            self._view.add_float(
+                f"+€{earned}",
+                (SIDEBAR_X + 170, 690),   # zona botones
+                GREEN_LIGHT,
+            )
+
