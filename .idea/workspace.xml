@@ -1,0 +1,163 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<project version="4">
+  <component name="AutoImportSettings">
+    <option name="autoReloadType" value="SELECTIVE" />
+  </component>
+  <component name="ChangeListManager">
+    <list default="true" id="644f5b30-7dc7-4c2a-bd58-0d12601b167d" name="Changes" comment="" />
+    <option name="SHOW_DIALOG" value="false" />
+    <option name="HIGHLIGHT_CONFLICTS" value="true" />
+    <option name="HIGHLIGHT_NON_ACTIVE_CHANGELIST" value="false" />
+    <option name="LAST_RESOLUTION" value="IGNORE" />
+  </component>
+  <component name="FileTemplateManagerImpl">
+    <option name="RECENT_TEMPLATES">
+      <list>
+        <option value="Python Script" />
+      </list>
+    </option>
+  </component>
+  <component name="Git.Settings">
+    <option name="RECENT_BRANCH_BY_REPOSITORY">
+      <map>
+        <entry key="$PROJECT_DIR$" value="main" />
+      </map>
+    </option>
+    <option name="RECENT_GIT_ROOT_PATH" value="$PROJECT_DIR$" />
+  </component>
+  <component name="GitHubPullRequestSearchHistory">{
+  &quot;lastFilter&quot;: {
+    &quot;state&quot;: &quot;OPEN&quot;,
+    &quot;assignee&quot;: &quot;black1599&quot;
+  }
+}</component>
+  <component name="GithubPullRequestsUISettings">{
+  &quot;selectedUrlAndAccountId&quot;: {
+    &quot;url&quot;: &quot;https://github.com/black1599/JUEGO.git&quot;,
+    &quot;accountId&quot;: &quot;2e8bcacc-52ed-4352-80e1-14afbcb6b911&quot;
+  }
+}</component>
+  <component name="McpProjectServerCommands">
+    <commands />
+    <urls />
+  </component>
+  <component name="ProjectColorInfo">{
+  &quot;associatedIndex&quot;: 7
+}</component>
+  <component name="ProjectId" id="3D54EiQe0fJMzlRRRUPs3vLqtt4" />
+  <component name="ProjectViewState">
+    <option name="hideEmptyMiddlePackages" value="true" />
+    <option name="showLibraryContents" value="true" />
+  </component>
+  <component name="PropertiesComponent"><![CDATA[{
+  "keyToString": {
+    "Python.pantalla.executor": "Run",
+    "RunOnceActivity.MCP Project settings loaded": "true",
+    "RunOnceActivity.ShowReadmeOnStart": "true",
+    "RunOnceActivity.git.unshallow": "true",
+    "com.intellij.ml.llm.matterhorn.ej.ui.settings.DefaultModelSelectionForGA.v1": "true",
+    "ignore.virus.scanning.warn.message": "true",
+    "junie.onboarding.icon.badge.shown": "true",
+    "settings.editor.selected.configurable": "preferences.pluginManager",
+    "to.speed.mode.migration.done": "true"
+  }
+}]]></component>
+  <component name="SharedIndexes">
+    <attachedChunks>
+      <set>
+        <option value="bundled-python-sdk-4762d8aabb82-6d6dccd035ac-com.jetbrains.pycharm.pro.sharedIndexes.bundled-PY-253.30387.173" />
+      </set>
+    </attachedChunks>
+  </component>
+  <component name="TaskManager">
+    <task active="true" id="Default" summary="Default task">
+      <changelist id="644f5b30-7dc7-4c2a-bd58-0d12601b167d" name="Changes" comment="" />
+      <created>1777558487085</created>
+      <option name="number" value="Default" />
+      <option name="presentableId" value="Default" />
+      <updated>1777558487085</updated>
+    </task>
+    <task id="LOCAL-00001" summary="Creación de archivo para pantalla del Juego">
+      <option name="closed" value="true" />
+      <created>1777558905165</created>
+      <option name="number" value="00001" />
+      <option name="presentableId" value="LOCAL-00001" />
+      <option name="project" value="LOCAL" />
+      <updated>1777558905165</updated>
+    </task>
+    <task id="LOCAL-00002" summary="Importo librerias&#10;Creo ventana para que la vea el usuario&#10;Pongo reloj para controlar los FPS del juego">
+      <option name="closed" value="true" />
+      <created>1777559202379</created>
+      <option name="number" value="00002" />
+      <option name="presentableId" value="LOCAL-00002" />
+      <option name="project" value="LOCAL" />
+      <updated>1777559202379</updated>
+    </task>
+    <task id="LOCAL-00003" summary="Creamos pantalla, se controla el cierre, limite de FPS y limpia la pantalla">
+      <option name="closed" value="true" />
+      <created>1777559725773</created>
+      <option name="number" value="00003" />
+      <option name="presentableId" value="LOCAL-00003" />
+      <option name="project" value="LOCAL" />
+      <updated>1777559725773</updated>
+    </task>
+    <task id="LOCAL-00004" summary="Colores y Texto">
+      <option name="closed" value="true" />
+      <created>1777565752187</created>
+      <option name="number" value="00004" />
+      <option name="presentableId" value="LOCAL-00004" />
+      <option name="project" value="LOCAL" />
+      <updated>1777565752187</updated>
+    </task>
+    <task id="LOCAL-00005" summary="Funciones para dibujar el texto y los rectangulos">
+      <option name="closed" value="true" />
+      <created>1777565812631</created>
+      <option name="number" value="00005" />
+      <option name="presentableId" value="LOCAL-00005" />
+      <option name="project" value="LOCAL" />
+      <updated>1777565812631</updated>
+    </task>
+    <task id="LOCAL-00006" summary="Feature cerradas y metidas al main">
+      <option name="closed" value="true" />
+      <created>1781636600897</created>
+      <option name="number" value="00006" />
+      <option name="presentableId" value="LOCAL-00006" />
+      <option name="project" value="LOCAL" />
+      <updated>1781636600897</updated>
+    </task>
+    <option name="localTasksCounter" value="7" />
+    <servers />
+  </component>
+  <component name="Vcs.Log.Tabs.Properties">
+    <option name="TAB_STATES">
+      <map>
+        <entry key="MAIN">
+          <value>
+            <State>
+              <option name="FILTERS">
+                <map>
+                  <entry key="branch">
+                    <value>
+                      <list>
+                        <option value="origin/feature/pantalla" />
+                      </list>
+                    </value>
+                  </entry>
+                </map>
+              </option>
+            </State>
+          </value>
+        </entry>
+      </map>
+    </option>
+  </component>
+  <component name="VcsManagerConfiguration">
+    <MESSAGE value="Creación de archivo para pantalla del Juego" />
+    <MESSAGE value="Importo librerias&#10;Creo ventana para que la vea el usuario&#10;Pongo reloj para controlar los FPS del juego" />
+    <MESSAGE value="Creamos pantalla, se controla el cierre, limite de FPS y limpia la pantalla" />
+    <MESSAGE value="Colores y Texto" />
+    <MESSAGE value="Funciones para dibujar el texto y los rectangulos" />
+    <MESSAGE value="Feature cerradas y metidas al main" />
+    <option name="LAST_COMMIT_MESSAGE" value="Feature cerradas y metidas al main" />
+  </component>
+</project>
