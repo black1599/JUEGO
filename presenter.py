@@ -39,8 +39,8 @@ class GamePresenter:
         snapshot = self._build_snapshot()
         self._view.render(snapshot)
 
-        # ── Snapshot: convierte el estado del modelo en datos planos para la vista ─
 
+        # Snapshot: convierte el estado del modelo en datos planos para la vista
     def _build_snapshot(self) -> dict:
         m = self._model
         return {
