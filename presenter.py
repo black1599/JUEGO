@@ -72,3 +72,6 @@ class GamePresenter:
                 GREEN_LIGHT,
             )
 
+    def _on_reset(self):
+        self._model.reset()
+        self._screen_mode = "game"
